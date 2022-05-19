@@ -32,9 +32,7 @@ SceneObject & SceneObject::scale(float x /*=1*/, float y/*=1*/, float z/*=1*/){
     return *this;
 }
 
-void SceneObject::render(){
-
-}
+void SceneObject::render(){}
 
 float SceneObject::get_x(){ return this->position[0];}
 float SceneObject::get_y(){ return this->position[1];}

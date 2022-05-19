@@ -22,34 +22,25 @@ Game::Game(){
     scenes.insert({"Menu", menu});
 
     // set MainScene menjadi scene yang utama
-    std::cout << main_scene->name << std::endl;
-    std::cout << menu->name << std::endl;
-    printf("Sebelum change scene\n");
-    printf("menu %d\n", menu->is_active);
-    printf("main %d\n", main_scene->is_active);
-
     change_scene("Menu");
 
     std::cout << active_scene->name << std::endl;
 
-    printf("setelah change scene\n");
-    printf("menu %d\n", menu->is_active);
-    printf("main %d\n", main_scene->is_active);
-
-    printf("Initialized\n");
+    // untuk menghitung frame time
     last_time = high_resolution_clock::now();
 }
 void Game::update(){
-    //auto active_scene = scenes.find(ACTIVE_SCENE); //.render();
+    // call update for scene yang sedang active
     active_scene->update();
-    high_resolution_clock::time_point now = high_resolution_clock::now();
-    milliseconds time_span = duration_cast<milliseconds>(now - last_time);
-    last_time = now;
-    std::cout << time_span.count() << std::endl;
-    
-    // 33 for 30 fps, 16 for 60 fps
-    int time_sleep = 16 - time_span.count();
-    if(time_sleep > 0) Sleep(time_sleep);
+
+    // limiting fps, hard coded for now
+    // high_resolution_clock::time_point now = high_resolution_clock::now();
+    // milliseconds time_span = duration_cast<milliseconds>(now - last_time);
+    // last_time = now;
+    // std::cout << time_span.count() << std::endl;
+    // 33 for 30 fps, 16 for 60 fps, actual: 16 ms sleep is 90 fps
+    // int time_sleep = 16 - time_span.count();
+    // if(time_sleep > 0) Sleep(time_sleep);
 
 }
 
@@ -58,11 +49,15 @@ void Game::change_scene(Scene &scene){
     if(active_scene) active_scene->is_active = false;
     active_scene = &scene;
     active_scene->is_active = true;
+    active_scene->reset();
+    active_scene->setup();
 }
 void Game::change_scene(string scene_name){
     if(active_scene) active_scene->is_active = false;
     active_scene = scenes.find(scene_name)->second;
     active_scene->is_active = true;
+    active_scene->reset();
+    active_scene->setup();
 }
 
 // callback methods

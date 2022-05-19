@@ -15,6 +15,8 @@ void Scene::update(){
     printf("Me terpanggil\n");
     render();
 }
+void Scene::setup(){}
+void Scene::reset(){}
 void Scene::render(){
     view();
 }
