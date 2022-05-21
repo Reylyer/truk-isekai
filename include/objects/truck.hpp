@@ -21,7 +21,6 @@ class Truck: public SceneObject{
         }
         void render() override{
             glPushMatrix();
-                scale().rotate(0).translate(0,0,0);
                 float *tpos = value_ptr(position);
                 glTranslatef(tpos[0], tpos[1], tpos[2]);
                 

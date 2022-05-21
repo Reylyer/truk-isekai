@@ -25,9 +25,9 @@
         public:
             SceneObject(float x=0 , float y=0, float z=0);
             ~SceneObject();
-            SceneObject &translate(float x, float y, float z);
-            SceneObject &rotate(float degrees, float x=0, float y=1, float z=0);
-            SceneObject &scale(float x=1, float y=1, float z=1);
+            void translate(float x, float y, float z);
+            void rotate(float degrees, float x=0, float y=1, float z=0);
+            void scale(float x=1, float y=1, float z=1);
             virtual void render();
 
         public:

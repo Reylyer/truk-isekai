@@ -21,6 +21,7 @@ class Menu: public Scene{
             printf("Selamat datang di menu\n");
         }
         void update() override{
+
             if(game->KEY_PRESSED['w']){
                 printf("w pressed\n");
                 key_select = 'w';
@@ -31,7 +32,6 @@ class Menu: public Scene{
                 printf("enter pressed\n");
                 key_select = 13;
             }
-
 
             if(!game->KEY_PRESSED[key_select] && key_select){
                 switch (key_select){
@@ -59,11 +59,11 @@ class Menu: public Scene{
                                 game->change_scene("MainScene");
                         }
                 }   
+
                 key_select = 0;
-                printf("%d\n", select);
                 this->select = min(3, max(0, this->select));
-                printf("%d\n", this->select);
             }
+            
             render();
         }
         void setup() override{

@@ -29,10 +29,7 @@ class Car: public SceneObject{
             texid = loadBMP(imagepath);
         }
         void render() override{
-            printf("rendered car\n"); 
-            glutWireCube(1);   
             glPushMatrix();
-                scale().rotate(0).translate(0,0,0);
                 float *tpos = value_ptr(position);
                 float *verts;
                 glTranslatef(tpos[0], tpos[1], tpos[2]);

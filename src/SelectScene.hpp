@@ -28,14 +28,14 @@ class SelectScene: public Scene{
             TruckVico * truck2 = new TruckVico();
             objects.insert({"truck2", truck2});
 
-            TruckVico * truck3 = new TruckVico(20, 0, 0);
-            objects.insert({"truck3", truck3});
+            // TruckVico * truck3 = new TruckVico(20, 0, 0);
+            // objects.insert({"truck3", truck3});
 
-            TruckVico * truck4 = new TruckVico(-20, 0, 0);
-            objects.insert({"truck4", truck4});
+            // TruckVico * truck4 = new TruckVico(-20, 0, 0);
+            // objects.insert({"truck4", truck4});
 
-            Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
-            objects.insert({"mobil", car1});
+            // Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
+            // objects.insert({"mobil", car1});
         }
         void setup() override{
             view();

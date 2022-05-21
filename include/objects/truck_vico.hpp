@@ -14,9 +14,7 @@ class TruckVico: public SceneObject{
         }
         void render() override{
             glPushMatrix();
-                // scale().rotate(0).translate(0,0,0);
                 float *tpos = value_ptr(position);
-                // printf("%f %f %f \n", tpos[0], tpos[1], tpos[2]);
                 glTranslatef(tpos[0], tpos[1], tpos[2]);
 
                 // membuat Kepala Truk

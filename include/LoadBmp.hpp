@@ -4,6 +4,9 @@
 #include <GL/freeglut.h>
 #include <GL/glext.h>
 
+#ifndef _LOADER_BMP_INCLUDED
+#define _LOADER_BMP_INCLUDED
+
 GLuint loadBMP(const char* imagepath) {
     unsigned char header[54];
     unsigned char* data;
@@ -54,7 +57,8 @@ GLuint loadBMP(const char* imagepath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    // glGenerateMipmap(GL_TEXTURE_2D);
 
     return textureID;
 }
+
+#endif
