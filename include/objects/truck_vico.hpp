@@ -3,6 +3,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 
+#ifndef _TRUCK_VICO
+#define _TRUCK_VICO
+
 
 class TruckVico: public SceneObject{
     public:
@@ -1054,3 +1057,5 @@ class TruckVico: public SceneObject{
     private:
         
 };
+
+#endif

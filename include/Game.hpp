@@ -29,7 +29,7 @@
         // core methods
         public:
             // initialization, binding all scenes
-            Game();
+            Game(int w, int h);
             void update();
 
         // scenes methods

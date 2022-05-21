@@ -11,29 +11,31 @@
 #include <objects/car.hpp>
 #include <objects/truck.hpp>
 #include <objects/truck_vico.hpp>
+#include <objects/truck_david.hpp>
+#include <objects/truck_dimas.hpp>
 
 
-#include <Scene.hpp>
-#include <Game.hpp>
-#include <string>
 
 using std::string;
 
-class MainScene: public Scene{
+class SelectScene: public Scene{
     public:
-        MainScene(Game &game, string name): Scene(game, name){
+        SelectScene(Game &game, string name): Scene(game, name){
             setup();
-            // Truck * truck1 = new Truck();
-            // objects.insert({"truck1", truck1});
+            Truck * truck1 = new Truck();
+            objects.insert({"truck1", truck1});
+
             TruckVico * truck2 = new TruckVico();
-            TruckVico * truck3 = new TruckVico(20, 0, 0);
-            TruckVico * truck4 = new TruckVico(-20, 0, 0);
             objects.insert({"truck2", truck2});
+
+            TruckVico * truck3 = new TruckVico(20, 0, 0);
             objects.insert({"truck3", truck3});
+
+            TruckVico * truck4 = new TruckVico(-20, 0, 0);
             objects.insert({"truck4", truck4});
 
-            // Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
-            // objects.insert({"mobil", car1});
+            Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
+            objects.insert({"mobil", car1});
         }
         void setup() override{
             view();
@@ -59,13 +61,9 @@ class MainScene: public Scene{
                     scene_object.second->render();
                 }
             }
+            glutWireCube(1);
             
             glClearColor(0., .5, 0.5, 1.0);
-
-            glColor3ub(255, 255, 255);
-
-            // //https://stackoverflow.com/a/34470897/14052716
-            glutBitmapString(GLUT_BITMAP_HELVETICA_18, reinterpret_cast<const unsigned char *>( "ini main scene bang"));
         }
 
         void view(){
@@ -76,8 +74,8 @@ class MainScene: public Scene{
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             gluLookAt(
-                0, 40, -50,
-                0, 0, 5,
+                2, 2, -2,
+                0, 2, 0,
                 0., 1., 0.
             );
         }

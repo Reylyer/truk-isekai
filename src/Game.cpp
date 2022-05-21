@@ -6,6 +6,7 @@
 
 #include <Game.hpp>
 #include "MainScene.hpp"
+#include "SelectScene.hpp"
 #include "Menu.hpp"
 
 using std::map,
@@ -16,11 +17,18 @@ using namespace std::chrono;
 
 // core methods
 // initialization, binding all scenes
-Game::Game(){
+Game::Game(int w, int h){
+    WIN_SIZE_W = w;
+    WIN_SIZE_H = h;
+
     MainScene *main_scene = new MainScene(*this, string("MainScene"));
-    Menu *menu = new Menu(*this, string("Menu"));
     scenes.insert({"MainScene", main_scene});
+
+    Menu *menu = new Menu(*this, string("Menu"));
     scenes.insert({"Menu", menu});
+
+    SelectScene *select_scene = new SelectScene(*this, string("SelectScene"));
+    scenes.insert({"SelectScene", select_scene});
 
     // set MainScene menjadi scene yang utama
     change_scene("Menu");
@@ -51,15 +59,11 @@ void Game::change_scene(Scene &scene){
     if(active_scene) active_scene->is_active = false;
     active_scene = &scene;
     active_scene->is_active = true;
-    active_scene->reset();
-    active_scene->setup();
 }
 void Game::change_scene(string scene_name){
     if(active_scene) active_scene->is_active = false;
     active_scene = scenes.find(scene_name)->second;
     active_scene->is_active = true;
-    active_scene->reset();
-    active_scene->setup();
 }
 
 // callback methods

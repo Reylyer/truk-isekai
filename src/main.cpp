@@ -47,7 +47,14 @@ void initGL() {
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_NORMALIZE);
     glEnable(GL_TEXTURE_2D);
+
+    glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+
+
 
     // glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient); 
  	// glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse); 
@@ -61,7 +68,7 @@ void initGL() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
-    main_game = new Game();
+    main_game = new Game(WIN_SIZE[0], WIN_SIZE[1]);
 }
 
 void handleKeyPress(unsigned char key, int x, int y){
@@ -83,11 +90,11 @@ void display(){
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(WIN_SIZE[0], WIN_SIZE[1]);
     glutCreateWindow("fuck mee");
-    glutIgnoreKeyRepeat(0); // Mengabaikan key repeat (saat tombol keyboard dipencet terus)
+    glutIgnoreKeyRepeat(0);
     initGL();
 
     // callbacks

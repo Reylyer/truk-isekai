@@ -11,6 +11,10 @@ using   std::vector;
 using   glm::vec3,
         glm::vec2;
 
+#ifndef _CAR
+#define _CAR
+
+
 class Car: public SceneObject{
     private:
         vector<vec3> vertices;
@@ -46,3 +50,5 @@ class Car: public SceneObject{
     private:
 
 };
+
+#endif

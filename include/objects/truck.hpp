@@ -3,6 +3,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 
+#ifndef _TRUCK_GIVANDRA
+#define _TRUCK_GIVANDRA
+
 
 class Truck: public SceneObject{
     private:
@@ -223,3 +226,6 @@ class Truck: public SceneObject{
             glEnd();
         }
 };
+
+
+#endif
