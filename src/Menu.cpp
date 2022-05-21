@@ -16,12 +16,6 @@ Menu::Menu(Game &game, string name): Scene(game, name){
 void Menu::setup(){};
 
 void Menu::update(){
-    // switch (select){
-    //     case 0:
-
-    //     case 1:
-        
-    // }
     if(game->KEY_PRESSED['w']){
         printf("w pressed\n");
         game->change_scene("MainScene");

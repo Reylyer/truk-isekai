@@ -12,7 +12,9 @@ using   glm::vec3,
 
 // template <class BaseSceneObject>
 SceneObject::SceneObject(float x/*=0*/ , float y/*=0*/, float z/*=0*/){
+
     position = vec4(x, y, z, 0);
+    printf("%f %f %f \n", position[0], position[1], position[2]);
 }
 SceneObject::~SceneObject(){}
 SceneObject & SceneObject::translate(float x, float y, float z){

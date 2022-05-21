@@ -1,22 +1,32 @@
 #define FREEGLUT_STATIC
 
+#include <string>
+#include <chrono>
+#include <iostream>
+
 #include <GL/freeglut.h>
 #include <MainScene.hpp>
 #include <Scene.hpp>
 #include <Game.hpp>
+
 #include <objects/car.hpp>
 #include <objects/truck.hpp>
-#include <string>
-#include <chrono>
-#include <iostream>
+#include <objects/truck_vico.hpp>
+
 
 using std::string;
 
 
 MainScene::MainScene(Game &game, string name): Scene(game, name){
     setup();
-    Truck * truck1 = new Truck();
-    objects.insert({"truck", truck1});
+    // Truck * truck1 = new Truck();
+    // objects.insert({"truck1", truck1});
+    TruckVico * truck2 = new TruckVico();
+    TruckVico * truck3 = new TruckVico(20, 0, 0);
+    TruckVico * truck4 = new TruckVico(-20, 0, 0);
+    objects.insert({"truck2", truck2});
+    objects.insert({"truck3", truck3});
+    objects.insert({"truck4", truck4});
 
     // Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
     // objects.insert({"mobil", car1});
@@ -30,7 +40,7 @@ void MainScene::setup(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(
-        0, 10, -20,
+        0, 40, -50,
         0, 0, 5,
         0., 1., 0.
     );
