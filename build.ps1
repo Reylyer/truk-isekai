@@ -6,7 +6,7 @@ mkdir -Force bin
 mkdir -Force src
 mkdir -Force obj
 
-$files_botak = Get-ChildItem -Path .\src -Name | ForEach-Object {$_.Split(".")[0]}
+$files_botak = Get-ChildItem -Path .\src -Name -Filter "*.cpp" | ForEach-Object {$_.Split(".")[0]}
 
 
 # compile each cpp files

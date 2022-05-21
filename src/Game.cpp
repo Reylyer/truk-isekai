@@ -1,11 +1,12 @@
 #include <windows.h>
-#include <Game.hpp>
 #include <map>
 #include <string>
-#include <MainScene.hpp>
-#include <Menu.hpp>
 #include <iostream>
 #include <chrono>
+
+#include <Game.hpp>
+#include "MainScene.hpp"
+#include "Menu.hpp"
 
 using std::map,
       std::string,
@@ -29,18 +30,19 @@ Game::Game(){
     // untuk menghitung frame time
     last_time = high_resolution_clock::now();
 }
+
 void Game::update(){
     // call update for scene yang sedang active
     active_scene->update();
 
     // limiting fps, hard coded for now
-    // high_resolution_clock::time_point now = high_resolution_clock::now();
-    // milliseconds time_span = duration_cast<milliseconds>(now - last_time);
-    // last_time = now;
+    high_resolution_clock::time_point now = high_resolution_clock::now();
+    milliseconds time_span = duration_cast<milliseconds>(now - last_time);
+    last_time = now;
     // std::cout << time_span.count() << std::endl;
     // 33 for 30 fps, 16 for 60 fps, actual: 16 ms sleep is 90 fps
-    // int time_sleep = 16 - time_span.count();
-    // if(time_sleep > 0) Sleep(time_sleep);
+    int time_sleep = 16 - time_span.count();
+    if(time_sleep > 0) Sleep(time_sleep);
 
 }
 

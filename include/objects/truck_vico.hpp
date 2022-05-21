@@ -706,8 +706,8 @@ class TruckVico: public SceneObject{
             // ------------------------------------------------------------------------------------------------
                 
                 // membuat Roda
-                int a;
-                int b;
+                float a;
+                float b;
                 
                 // Roda badan utama depan
                 glPushMatrix();	
