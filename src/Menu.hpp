@@ -63,9 +63,10 @@ class Menu: public Scene{
                 key_select = 0;
                 this->select = min(3, max(0, this->select));
             }
-            
+
             render();
         }
+
         void setup() override{
             view();
         }
@@ -80,32 +81,35 @@ class Menu: public Scene{
 
             // active background
             glColor4f(1, 1, 1, 0.1);
-            glRectf(game->WIN_SIZE_W/3,   game->WIN_SIZE_H/5*(select + 1) + game->WIN_SIZE_H/5/2, 
-                    game->WIN_SIZE_W/3*2, game->WIN_SIZE_H/5*(select + 1) - game->WIN_SIZE_H/5/2);
+            int container_height= game->WIN_SIZE_H*4/5;
+            glRectf(game->WIN_SIZE_W/3,   container_height/5*(select + 1) + container_height/5/2, 
+                    game->WIN_SIZE_W/3*2, container_height/5*(select + 1) - container_height/5/2);
 
             glColor4f(0.0f, 0.0f, 1.0f, 1.0f);  //RGBA values of text color
             drawCenteredString(GLUT_BITMAP_HELVETICA_18,
                                 (unsigned char*)"PLAY", 
                                 game->WIN_SIZE_W/2, 
-                                game->WIN_SIZE_H/5*4);
+                                container_height/5*4);
             drawCenteredString(GLUT_BITMAP_HELVETICA_18,
                                 (unsigned char*)"SELECT TRUGGG", 
                                 game->WIN_SIZE_W/2, 
-                                game->WIN_SIZE_H/5*3);
+                                container_height/5*3);
             drawCenteredString(GLUT_BITMAP_HELVETICA_18,
                                 (unsigned char*)"OPTION", 
                                 game->WIN_SIZE_W/2, 
-                                game->WIN_SIZE_H/5*2);
+                                container_height/5*2);
             drawCenteredString(GLUT_BITMAP_HELVETICA_18,
                                 (unsigned char*)"QUIT", 
                                 game->WIN_SIZE_W/2, 
-                                game->WIN_SIZE_H/5);
+                                container_height/5);
 
         }
+
         void reset(){
             select = 0;
             key_select = 0;
         }
+
         void view(){
             glMatrixMode(GL_PROJECTION);
             // setup biar pakai koordinat cartesian
@@ -118,6 +122,7 @@ class Menu: public Scene{
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
         }
+
         void drawCenteredString(void *font, const unsigned char *string, int x, int y){
             glRasterPos2i(x - glutBitmapLength(font, string)/2,
                           y - glutBitmapHeight(font)/2);            //Top left corner of text

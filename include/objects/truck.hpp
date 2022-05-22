@@ -22,6 +22,8 @@ class Truck: public SceneObject{
         void render() override{
             glPushMatrix();
                 float *tpos = value_ptr(position);
+                glScalef(2, 2, 2);
+                glPushMatrix();
                 glTranslatef(tpos[0], tpos[1], tpos[2]);
                 
                 // kepala
@@ -153,6 +155,7 @@ class Truck: public SceneObject{
                     glPopMatrix();
                     i++;
                 }
+                glPopMatrix();
             glPopMatrix();
         }
 

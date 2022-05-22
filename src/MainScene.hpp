@@ -28,9 +28,9 @@ class MainScene: public Scene{
             TruckVico * truck2 = new TruckVico();
             TruckVico * truck3 = new TruckVico(20, 0, 0);
             TruckVico * truck4 = new TruckVico(-20, 0, 0);
-            objects.insert({"truck2", truck2});
-            objects.insert({"truck3", truck3});
-            objects.insert({"truck4", truck4});
+            object_map.insert({"truck2", truck2});
+            object_map.insert({"truck3", truck3});
+            object_map.insert({"truck4", truck4});
 
             // Car *car1 = new Car("res/obj/car.obj", "res/bmp/car_2.bmp");
             // objects.insert({"mobil", car1});
@@ -50,22 +50,23 @@ class MainScene: public Scene{
     private:
         void render(){
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
             view();
+            glClearColor(0., .5, 0.5, 1.0);
+
 
             // gambar semua sceneObject
-            for(auto & scene_object: this->objects){
+            for(auto & scene_object: this->object_map){
                 if(scene_object.second->is_active){
                     scene_object.second->render();
                 }
             }
+            for(auto & scene_object: this->object_vect){
+                if(scene_object->is_active){
+                    scene_object->render();
+                }
+            }
             
-            glClearColor(0., .5, 0.5, 1.0);
 
-            glColor3ub(255, 255, 255);
-
-            // //https://stackoverflow.com/a/34470897/14052716
-            glutBitmapString(GLUT_BITMAP_HELVETICA_18, reinterpret_cast<const unsigned char *>( "ini main scene bang"));
         }
 
         void view(){

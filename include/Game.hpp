@@ -16,10 +16,11 @@
             // https://stackoverflow.com/a/866716/14052716
             bool  KEY_PRESSED[255];
             int   MOUSE_POSITION_X,
-                MOUSE_POSITION_Y;
+                  MOUSE_POSITION_Y;
             int   WIN_SIZE_W,
-                WIN_SIZE_H;
+                  WIN_SIZE_H;
             float RATIO;
+            int   player_truck = 0;
             // https://stackoverflow.com/a/21385166/14052716
             map<string, Scene *> scenes;
             Scene *active_scene;

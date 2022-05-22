@@ -4,15 +4,18 @@
     #include "SceneObject.hpp"
     #include <map>
     #include <string>
+    #include <vector>
 
     using   std::map,
-            std::string;
+            std::string,
+            std::vector;
 
     class Game;
 
     class Scene{
         public:
-            map<string, SceneObject*> objects;
+            map<string, SceneObject*> object_map;
+            vector<SceneObject*> object_vect;
             Game *game;
             bool is_active = false;
             string name;
