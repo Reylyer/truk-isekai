@@ -26,7 +26,7 @@ Untuk sekarang disarankan menggunakan `build.ps1` yang sudah ada di root folder 
 Pastikan sudah memiliki gcc / g++ 64bit dan menggunakan standar c++ 11 keatas. 
 Setelah berhasil compile, executable akan disimpan di `bin/main.exe`
 
-jika tidak bisa melakukan run ps1 file tersebut dikarenakan permission atau keamanan run unknown script run dalam powershell admin
+jika tidak bisa melakukan run ps1 file tersebut dikarenakan permission atau keamanan run unknown script. Run perintah berikut dalam powershell admin
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
