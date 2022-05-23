@@ -33,10 +33,11 @@ class SelectScene: public Scene{
         int key_select;
         int move = 0;
         float t2t = 20; // truck 2 truck
+        int lock = 0;
 
     public:
         SelectScene(Game &game, string name): Scene(game, name){
-            Truck      *truck1 = new Truck(0, 3, -5);
+            Truck      *truck1 = new Truck(0, 0, 0);
             TruckVico  *truck2 = new TruckVico(t2t, 0, 0);
             TruckDavid *truck3 = new TruckDavid(2*t2t, 0, 0);
             TruckDimas *truck4 = new TruckDimas(3*t2t, 0, 0);
@@ -50,46 +51,50 @@ class SelectScene: public Scene{
         }
 
         void setup() override{
+            this->lock = 60;
             this->select_truck = game->player_truck;
             this->prev_truck = this->select_truck;
-            view();
         }
 
         void update() override{
-            if(game->KEY_PRESSED['d']){
-                printf("d pressed\n");
-                key_select = 'd';
-            } else if(game->KEY_PRESSED['a']){
-                printf("a pressed\n");
-                key_select = 'a';
-            } else if(game->KEY_PRESSED[13]){
-                key_select = 13;
-            }
+            if(!lock){
 
-            if(!game->KEY_PRESSED[key_select] && key_select){
-                this->prev_truck = this->select_truck;
-                switch (key_select){
-                    case 'd':
-                        this->select_truck++;
-                        this->move = -60;
-                        break;
-                    case 'a':
-                        this->select_truck--;
-                        this->move = 60;
-                        break;
-                    case 13:
-                        game->player_truck = this->select_truck;
-                        game->change_scene("Menu");
-                }   
-                key_select = 0;
-                if(this->select_truck < 0){
-                    this->select_truck = 0;
-                    this->move = 0;
-                } else if(this->select_truck > 3){
-                    this->select_truck = 3;
-                    this->move = 0;
+                if(game->KEY_PRESSED['d']){
+                    printf("d pressed\n");
+                    key_select = 'd';
+                } else if(game->KEY_PRESSED['a']){
+                    printf("a pressed\n");
+                    key_select = 'a';
+                } else if(game->KEY_PRESSED[13]){
+                    key_select = 13;
+                }
+
+                if(!game->KEY_PRESSED[key_select] && key_select){
+                    this->prev_truck = this->select_truck;
+                    switch (key_select){
+                        case 'd':
+                            this->select_truck++;
+                            this->move = -60;
+                            break;
+                        case 'a':
+                            this->select_truck--;
+                            this->move = 60;
+                            break;
+                        case 13:
+                            game->player_truck = this->select_truck;
+                            game->change_scene("Menu");
+                    }   
+                    key_select = 0;
+                    if(this->select_truck < 0){
+                        this->select_truck = 0;
+                        this->move = 0;
+                    } else if(this->select_truck > 3){
+                        this->select_truck = 3;
+                        this->move = 0;
+                    }
                 }
             }
+            if(lock) lock--; 
             render();
         }
 

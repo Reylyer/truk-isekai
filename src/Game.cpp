@@ -42,6 +42,7 @@ Game::Game(int w, int h){
 void Game::update(){
     // call update for scene yang sedang active
     active_scene->update();
+    // std::cout << active_scene->name << std::endl;
 
     // limiting fps, hard coded for now
     high_resolution_clock::time_point now = high_resolution_clock::now();
@@ -59,11 +60,14 @@ void Game::change_scene(Scene &scene){
     if(active_scene) active_scene->is_active = false;
     active_scene = &scene;
     active_scene->is_active = true;
+    active_scene->setup();
 }
 void Game::change_scene(string scene_name){
     if(active_scene) active_scene->is_active = false;
     active_scene = scenes.find(scene_name)->second;
     active_scene->is_active = true;
+    active_scene->setup();
+
 }
 
 // callback methods

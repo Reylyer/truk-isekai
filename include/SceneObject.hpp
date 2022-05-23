@@ -16,7 +16,7 @@
     // template <class BaseSceneObject>
     class SceneObject{
         protected:
-            vec4 position;
+            vec3 position;
             vec4 direction;
         
         public:

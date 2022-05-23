@@ -22,9 +22,10 @@ class Truck: public SceneObject{
         void render() override{
             glPushMatrix();
                 float *tpos = value_ptr(position);
-                glScalef(2, 2, 2);
-                glPushMatrix();
                 glTranslatef(tpos[0], tpos[1], tpos[2]);
+                glTranslatef(0, 6, -10);
+                glPushMatrix();
+                glScalef(2, 2, 2);
                 
                 // kepala
                 glColor3ub(100, 100, 100);

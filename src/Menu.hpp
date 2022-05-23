@@ -14,6 +14,7 @@ class Menu: public Scene{
     // quit 0
         int select = 3;
         int key_select;
+        int lock = 0;
 
     public:
         Menu(Game &game, string name): Scene(game, name){
@@ -21,54 +22,44 @@ class Menu: public Scene{
             printf("Selamat datang di menu\n");
         }
         void update() override{
+                
+            if(!lock){
+                if(game->KEY_PRESSED['w']){
+                    printf("w pressed\n");
+                    this->select++;
+                    lock = 30;
 
-            if(game->KEY_PRESSED['w']){
-                printf("w pressed\n");
-                key_select = 'w';
-            } else if(game->KEY_PRESSED['s']){
-                printf("s pressed\n");
-                key_select = 's';
-            } else if(game->KEY_PRESSED[13]){
-                printf("enter pressed\n");
-                key_select = 13;
-            }
+                } else if(game->KEY_PRESSED['s']){
+                    printf("s pressed\n");
+                    this->select--;
+                    lock = 30;
 
-            if(!game->KEY_PRESSED[key_select] && key_select){
-                switch (key_select){
-                    case 'w':
-                        this->select++;
-                        break;
-                    case 's':
-                        this->select--;
-                        break;
-                    case 13:
-                        switch (select){
-                            // quit
-                            case 0:
-                                glutLeaveMainLoop();
-                                break;
-                            // option
-                            case 1:
-                                break;
-                            // select trug
-                            case 2:
-                                game->change_scene("SelectScene");
-                                break;
-                            // play
-                            case 3:
-                                game->change_scene("MainScene");
-                        }
-                }   
-
-                key_select = 0;
+                } else if(game->KEY_PRESSED[13]){
+                    printf("enter pressed\n");
+                    switch (select){
+                        // quit
+                        case 0:
+                            glutLeaveMainLoop();
+                            break;
+                        // option
+                        case 1:
+                            break;
+                        // select trug
+                        case 2:
+                            game->change_scene("SelectScene");
+                            break;
+                        // play
+                        case 3:
+                            game->change_scene("MainScene");
+                    }
+                }
                 this->select = min(3, max(0, this->select));
             }
-
+            if(lock) lock--; 
             render();
         }
 
         void setup() override{
-            view();
         }
 
     private:

@@ -13,22 +13,23 @@ using   glm::vec3,
 // template <class BaseSceneObject>
 SceneObject::SceneObject(float x/*=0*/ , float y/*=0*/, float z/*=0*/){
 
-    position = vec4(x, y, z, 0);
-    printf("%f %f %f \n", position[0], position[1], position[2]);
+    position = vec3(x, y, z);
+    // printf("%f %f %f \n", position[0], position[1], position[2]);
 }
 SceneObject::~SceneObject(){}
 void SceneObject::translate(float x, float y, float z){
     // translate position by x, y, z
     //         <       translation matrix          > * <vecpos>
-    position = glm::translate(mat4(), vec3(x, y, z)) * position;
+    // position = glm::translate(mat4(), vec3(x, y, z)) * position;
+    position = position + vec3(x, y, z);
 }
 
 void SceneObject::rotate(float degrees, float x/*=0*/, float y/*=1*/, float z/*=0*/){
-    direction = glm::rotate(mat4(), glm::radians(degrees), vec3(x, y, z)) * direction;
+    // direction = glm::rotate(mat4(), glm::radians(degrees), vec3(x, y, z)) * direction;
 }
 
 void SceneObject::scale(float x /*=1*/, float y/*=1*/, float z/*=1*/){
-    position = glm::scale(mat4(), vec3(x, y, z)) * position;
+    // position = glm::scale(mat4(), vec3(x, y, z)) * position;
 }
 
 void SceneObject::render(){}
