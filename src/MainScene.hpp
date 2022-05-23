@@ -25,17 +25,16 @@ using std::string,
 
 class MainScene: public Scene{
     private:
+        float speed = 1.5;
         map<int, SceneObject*> trucks;
         SceneObject* player;
 
         int lock = 0;
         float truck_steer_direction = 0;
 
-        int aspal_loop_index = 0;
-        int aspal_max_loop   = 0;
-
         Asphalt * asphalt;
 
+        int frame_count = 0;
 
     public:
         MainScene(Game &game, string name): Scene(game, name){
@@ -45,7 +44,7 @@ class MainScene: public Scene{
             TruckDavid * truck3 = new TruckDavid();
             TruckDimas * truck4 = new TruckDimas();
             std::cout << asphalt << std::endl;
-            this->asphalt = new Asphalt("res/bmp/car_2.bmp", 50, 50);
+            this->asphalt = new Asphalt("res/bmp/car_2.bmp", 33, 33, 3, 0, 0, -60);
             std::cout << asphalt << std::endl;
 
             if(!asphalt){
@@ -63,6 +62,7 @@ class MainScene: public Scene{
         }
         void setup() override{
             player = trucks.find(game->player_truck)->second;
+            frame_count = 0;
         }
         void update() override{
             if(!lock){
@@ -86,6 +86,7 @@ class MainScene: public Scene{
             render();
             if(lock) lock--; 
             else truck_steer_direction = 0;
+            frame_count++;
         }
 
     private:
@@ -95,17 +96,22 @@ class MainScene: public Scene{
             glClearColor(0., .5, 0.5, 1.0);
 
             glPushMatrix();
-                player->translate(lock/30.*1.3 * truck_steer_direction, 0, 0);
-                asphalt->translate(0, 0, -1);
-                player->render();
+                player->translate(lock/30.*1.5 * truck_steer_direction, 0, 0);
+
+                asphalt->translate(0, 0, -speed);
+                if(frame_count*speed >= 66){
+                    asphalt->translate(0, 0, 66);
+                    frame_count = 0;
+                }
+
                 asphalt->render();
+                player->render();
                 for(auto & scene_object: this->object_map){
                     if(scene_object.second->is_active){
                         scene_object.second->render();
                     }
                 }
             glPopMatrix();
-            
 
         }
 
@@ -117,8 +123,8 @@ class MainScene: public Scene{
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             gluLookAt(
-                0, 120, -70,
-                0, 0, 120,
+                0, 40, -70,
+                0, 0, 30,
                 0., 1., 0.
             );
         }
