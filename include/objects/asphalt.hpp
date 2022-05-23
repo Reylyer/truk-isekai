@@ -24,7 +24,7 @@ class Asphalt: public SceneObject{
             this->h = h;
             this->lane_width = w/lane*2;
             this->repeat = repeat;
-            // this->texid = loadBMP(imagepath);
+            // this->texid = loadBMP("res/bmp/asphalt.bmp");
         }
         void render() override{
             // std::cout << w << " " << h << " " << texid << "\n";

@@ -44,6 +44,9 @@ class MainScene: public Scene{
         int frame_count = 0;
         int repeat_segment = 20;
         int segment_length = 33;
+
+        int score = 0;
+        bool nabrak = false;
         
 
     public:
@@ -78,6 +81,7 @@ class MainScene: public Scene{
             player_lane = 0;
             frame_count = 0;
             speed = 1.5;
+            score = 0;
             player->set_x(0);
             for(auto & row_of_obstacles: row_of_obstacless){
                 row_of_obstacles->translate(0, 0, 300);
@@ -115,30 +119,35 @@ class MainScene: public Scene{
             if(checkCollision()){
                 speed = 0;
                 lock = 0;
-            }   
+                nabrak = true;
+                game->change_scene("LOSE");
+            } else{
+                player->translate(lock/30.*1.5 * truck_steer_direction, 0, 0);
+                asphalt->translate(0, 0, -speed);
+                for(auto & row_of_obstacles: row_of_obstacless){
+                    row_of_obstacles->translate(0, 0, -speed);
+                }
+                if(row_of_obstacless[row_active]->get_z() < -50){
+                    row_of_obstacless[row_active]->translate(0, 0, segment_length*4*repeat_segment);
+                    row_of_obstacless[row_active]->randomize();
+                    row_active = (row_active + 1) % repeat_segment;
+                    printf("%d\n",  row_active);
+                }
 
-            player->translate(lock/30.*1.5 * truck_steer_direction, 0, 0);
-            asphalt->translate(0, 0, -speed);
-            for(auto & row_of_obstacles: row_of_obstacless){
-                row_of_obstacles->translate(0, 0, -speed);
-            }
-            if(row_of_obstacless[row_active]->get_z() < -50){
-                row_of_obstacless[row_active]->translate(0, 0, segment_length*4*repeat_segment);
-                row_of_obstacless[row_active]->randomize();
-                row_active = (row_active + 1) % repeat_segment;
-                printf("%d\n",  row_active);
+                if(frame_count*speed >= segment_length*2){
+                    asphalt->translate(0, 0, segment_length*2);
+                    frame_count = 0;
+                }
+                score++;
             }
 
-            if(frame_count*speed >= segment_length*2){
-                asphalt->translate(0, 0, segment_length*2);
-                frame_count = 0;
-            }
 
             render();
 
             if(lock) lock--; 
             else truck_steer_direction = 0;
             frame_count++;
+            std::cout << "SCORE: " << score << "\n";
         }
 
     private:
@@ -167,6 +176,24 @@ class MainScene: public Scene{
                     glVertex3f(-30, 0, 0);
                     glVertex3f( 30, 0, 0);
                 glEnd();
+
+                glMatrixMode(GL_PROJECTION);
+                glPushMatrix();
+                    glLoadIdentity();
+                    gluOrtho2D(0.0f, game->WIN_SIZE_W, game->WIN_SIZE_H, 0.0f);
+                    glMatrixMode(GL_MODELVIEW);
+                    glPushMatrix();
+                        glLoadIdentity();
+                        glColor3f(1, 1, 1);
+                        glRasterPos2f(30, 160);
+                        char skor[72];
+                        sprintf(skor, "%d", score);
+                        glutBitmapString(GLUT_BITMAP_HELVETICA_10, (unsigned char *) skor);
+                        glMatrixMode(GL_PROJECTION);
+                    glPopMatrix();
+                glMatrixMode(GL_MODELVIEW);
+                glPopMatrix();
+
                 asphalt->render();
                 player->render();
 

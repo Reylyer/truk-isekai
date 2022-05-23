@@ -46,15 +46,13 @@ void initGL() {
     glColorMaterial(GL_FRONT, GL_DIFFUSE);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_NORMALIZE);
-    glEnable(GL_TEXTURE_2D);
+    // glEnable(GL_TEXTURE_2D);
 
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-
-
 
     // glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient); 
  	// glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse); 
@@ -73,6 +71,7 @@ void initGL() {
 
 void handleKeyPress(unsigned char key, int x, int y){
     main_game->keyboardPressCallback(key, x, y);
+    GLUT_KEY_UP
 }
 void handleKeyRelease(unsigned char key, int x, int y){
     main_game->keyboardReleaseCallback(key, x, y);
