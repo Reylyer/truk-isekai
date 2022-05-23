@@ -51,7 +51,7 @@ class SelectScene: public Scene{
         }
 
         void setup() override{
-            this->lock = 60;
+            this->lock = 20;
             this->select_truck = game->player_truck;
             this->prev_truck = this->select_truck;
         }
@@ -110,7 +110,7 @@ class SelectScene: public Scene{
 
                 // std::cout << move << "\n";
                 float interpolated_position = select_truck + move/60.;
-                std::cout << this->move << " " << interpolated_position<< "\n";
+                // std::cout << this->move << " " << interpolated_position<< "\n";
                 interpolated_position = fmin(3, fmax(0, interpolated_position));
                 if(move){
                     printf("succc");

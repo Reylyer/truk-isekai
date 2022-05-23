@@ -1,6 +1,9 @@
+#define FREEGLUT_STATIC
+
 #include <string>
 #include <iostream>
 #include <vector>
+#include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <SceneObject.hpp>
@@ -19,8 +22,6 @@ SceneObject::SceneObject(float x/*=0*/ , float y/*=0*/, float z/*=0*/){
 SceneObject::~SceneObject(){}
 void SceneObject::translate(float x, float y, float z){
     // translate position by x, y, z
-    //         <       translation matrix          > * <vecpos>
-    // position = glm::translate(mat4(), vec3(x, y, z)) * position;
     position = position + vec3(x, y, z);
 }
 
@@ -32,9 +33,20 @@ void SceneObject::scale(float x /*=1*/, float y/*=1*/, float z/*=1*/){
     // position = glm::scale(mat4(), vec3(x, y, z)) * position;
 }
 
-void SceneObject::render(){}
+void SceneObject::render(){
+    glPushMatrix();
+        // glBindTexture(GL_TEXTURE_2D, this->texid);
+        float *tpos = value_ptr(position);
+        glTranslatef(tpos[0], tpos[1], tpos[2]);
+        glutWireCube(15);
+    glPopMatrix();
+}
 
 float SceneObject::get_x(){ return this->position[0];}
 float SceneObject::get_y(){ return this->position[1];}
 float SceneObject::get_z(){ return this->position[2];}
+
+void SceneObject::set_x(float x){this->position[0] = x;}
+void SceneObject::set_y(float y){this->position[1] = y;}
+void SceneObject::set_z(float z){this->position[2] = z;}
 

@@ -15,13 +15,15 @@ class Asphalt: public SceneObject{
         float w;
         float h;
         float lane_width;
+        int repeat;
         GLuint texid;
     public:
-        Asphalt(const char* imagepath, float w = 1, float h = 1, int lane = 3, float x=0, float y=0, float z=0):
+        Asphalt(const char* imagepath, float w = 1, float h = 1, int lane = 3, int repeat = 20, float x=0, float y=0, float z=0):
             SceneObject(x, y, z){
             this->w = w;
             this->h = h;
             this->lane_width = w/lane*2;
+            this->repeat = repeat;
             // this->texid = loadBMP(imagepath);
         }
         void render() override{
@@ -31,7 +33,7 @@ class Asphalt: public SceneObject{
                 float *tpos = value_ptr(position);
                 glTranslatef(tpos[0], tpos[1], tpos[2]);
 
-                for(int i = 0; i < 20; i++){
+                for(int i = 0; i < this->repeat; i++){
                     glTranslatef(0, 0, h*2);
                     // hitam
                     glColor3f(0, 0, 0);
