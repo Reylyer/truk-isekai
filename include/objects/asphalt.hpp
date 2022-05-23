@@ -48,7 +48,7 @@ class Asphalt: public SceneObject{
                         glVertex3f(w, 0, h);
                     glEnd();
                     // marka
-                    glColor3f(1, 1, 1);
+                    glColor3f(0.7, 0.7, 0.7);
                     glBegin(GL_QUADS);
                         // kiri
                         glVertex3f(-w, 0.1, h);

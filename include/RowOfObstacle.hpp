@@ -24,7 +24,6 @@ class RowOfObstacle : public SceneObject{
 
         void render() override{
             for(auto &objek : lane){
-                // std::cout << objek << " ";
                 if(objek != NULL) objek->render();
             }
         }
@@ -32,7 +31,6 @@ class RowOfObstacle : public SceneObject{
         void translate(float x, float y, float z) override{
             position += vec3(x, y, z);
             for(auto &objek : lane){
-                // std::cout << objek << " ";
                 if(objek != NULL) objek->translate(x, y, z);
             }
         }

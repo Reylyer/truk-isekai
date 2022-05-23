@@ -29,8 +29,6 @@ typedef std::mt19937 RNG;  // the Mersenne Twister with a popular choice of para
 uint32_t seed_val;           // populate somehow
 
 
-
-
 class MainScene: public Scene{
     private:
         map<int, SceneObject*> trucks;
@@ -81,6 +79,9 @@ class MainScene: public Scene{
             frame_count = 0;
             speed = 1.5;
             player->set_x(0);
+            for(auto & row_of_obstacles: row_of_obstacless){
+                row_of_obstacles->translate(0, 0, 300);
+            }
         }
         void update() override{
             if(!lock){
@@ -113,6 +114,7 @@ class MainScene: public Scene{
 
             if(checkCollision()){
                 speed = 0;
+                lock = 0;
             }   
 
             player->translate(lock/30.*1.5 * truck_steer_direction, 0, 0);
@@ -141,15 +143,30 @@ class MainScene: public Scene{
 
     private:
         bool checkCollision(){
+            if(row_of_obstacless[row_active]->get_z() < 0){
+                float xpos = player->get_x();
+                for(auto &obstacle: row_of_obstacless[row_active]->lane){
+                    if(obstacle == NULL) continue;
+                    std::cout << player->get_x() - segment_length << " < " <<  obstacle->get_x() << " < " << player->get_x() + segment_length << "\n";
+                    if(obstacle->get_x() > player->get_x() - segment_length/2 && 
+                       obstacle->get_x() < player->get_x() + segment_length/2){
+                        return true;
+                       }
+                }
+            }
             return false;
         }
 
         void render(){
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             view();
-            glClearColor(0., .5, 0.5, 1.0);
+            glClearColor(1, 0.643, 0.286, 1.0);
 
             glPushMatrix();
+                glBegin(GL_LINES);
+                    glVertex3f(-30, 0, 0);
+                    glVertex3f( 30, 0, 0);
+                glEnd();
                 asphalt->render();
                 player->render();
 
