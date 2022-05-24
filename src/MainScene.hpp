@@ -120,7 +120,6 @@ class MainScene: public Scene{
                 speed = 0;
                 lock = 0;
                 nabrak = true;
-                game->change_scene("LOSE");
             } else{
                 player->translate(lock/30.*1.5 * truck_steer_direction, 0, 0);
                 asphalt->translate(0, 0, -speed);
@@ -188,7 +187,7 @@ class MainScene: public Scene{
                         glRasterPos2f(30, 160);
                         char skor[72];
                         sprintf(skor, "%d", score);
-                        glutBitmapString(GLUT_BITMAP_HELVETICA_10, (unsigned char *) skor);
+                        glutBitmapString(GLUT_BITMAP_HELVETICA_18, (unsigned char *) skor);
                         glMatrixMode(GL_PROJECTION);
                     glPopMatrix();
                 glMatrixMode(GL_MODELVIEW);

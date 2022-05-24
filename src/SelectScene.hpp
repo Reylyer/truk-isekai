@@ -108,12 +108,9 @@ class SelectScene: public Scene{
                 // geser
                 glScalef(0.3, 0.3, 0.3);
 
-                // std::cout << move << "\n";
                 float interpolated_position = select_truck + move/60.;
-                // std::cout << this->move << " " << interpolated_position<< "\n";
                 interpolated_position = fmin(3, fmax(0, interpolated_position));
                 if(move){
-                    printf("succc");
                     if(move > 0) move-=4;
                     if(move < 0) move+=4;
                 }

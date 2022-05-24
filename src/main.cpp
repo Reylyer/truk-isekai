@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowPosition(100, 100);
     glutInitWindowSize(WIN_SIZE[0], WIN_SIZE[1]);
-    glutCreateWindow("fuck mee");
+    glutCreateWindow("Truk");
     glutIgnoreKeyRepeat(0);
     initGL();
 
