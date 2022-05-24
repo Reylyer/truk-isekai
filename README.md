@@ -33,3 +33,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 ## Pemecahan kode ke file
 ### entar dulu
+
+# demo
+Note: ini bukan kecepatan sebenarnya, ini sekitar 0.6x lebih lambat
+![](./github%20resource/output2.gif)
